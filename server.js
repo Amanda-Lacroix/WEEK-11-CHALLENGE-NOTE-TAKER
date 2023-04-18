@@ -2,8 +2,10 @@
 const express = require('express');
 const path = require('path');
 const app = express ();
-const PORT = 3000;
+const PORT = 3001;
 
+// To use the JSON file
+const notes = require('./db.json')
 
 // Middleware that defaults to serve the files in the Public folder
 app.use(express.static('public'));
@@ -17,7 +19,11 @@ app.get('/index', (req, res) =>
 
 app.get('/notes', (req, res) => 
     res.sendFile(path.join(__dirname, 'public/notes.html')));
+
+// Redirection route if user tries to get a route that doesnt exist
+
+app.get('*', (req, res) =>
+res.send ('/index.html'));
   
-app.listen(PORT, () => {
-console.log ('Test-running on 3000')
-});
+app.listen(PORT, () => 
+console.log(`Running on http://localhost:${PORT}`));
