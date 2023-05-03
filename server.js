@@ -3,7 +3,9 @@ const express = require('express');
 const path = require('path');
 const app = express ();
 const PORT = 3001;
+// The module to interact with the file system
 const fs = require('fs');
+// The NPM to create the unique ids
 const uuid = require('uuid');
 
 // To use the JSON file
@@ -54,6 +56,18 @@ app.get('/api/notes', (req, res) => {
       });
     });
 });
+
+// To delete notes
+app.delete('/api/notes/:id', (req, res) => {
+  const {id} = req.params;
+
+  db.remove(id)
+    .then(removed)
+      res.status(204). end();
+  else {
+      res.status(404).json({message: "Not Found"})
+    }
+  })
 
 // Listening for connections
 app.listen(PORT, () => 
