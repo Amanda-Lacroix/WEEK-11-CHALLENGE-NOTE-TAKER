@@ -18,7 +18,7 @@
 
   ## Deployment 
   
-  The app is being deployed via Heroku at: 
+  The app is being deployed via Heroku at: https://enigmatic-meadow-68658.herokuapp.com
 
   ## Screenshot
  
@@ -31,7 +31,7 @@
 
   ## Credits
  - Starter code provided by: https://git.bootcampcontent.com/new-brunswick/UNB-VIRT-FSF-PT-01-2023-U-LOLC
- - https://dev.to/cesareferrari/deleting-a-resource-via-http-delete-5hd9
+ 
 
   ## License
   [MIT]( https://opensource.org/licenses/MIT)

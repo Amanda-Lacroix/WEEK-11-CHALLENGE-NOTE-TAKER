@@ -58,16 +58,21 @@ app.get('/api/notes', (req, res) => {
 });
 
 // To delete notes
-// app.delete('/api/notes/:id', (req, res) => {
-//   const {id} = req.params;
+app.delete('/api/notes/:id', (req, res) => {
+  const {id} = req.params;
 
-//   db.remove(id)
-//   .then(removed => {
-//     if (removed) {
-//       res.status(204).end();
-//     }
-//   })
-// })
+  fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
+    if (err) throw err;
+    
+    const notes = JSON.parse(data);
+    notes.push(newNote);
+    
+    fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes), (err) => {
+      if (err) throw err;
+      res.json(newNote);
+    });
+  });
+});
 
 
 // Listening for connections
