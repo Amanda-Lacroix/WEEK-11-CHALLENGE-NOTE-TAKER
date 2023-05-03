@@ -58,16 +58,17 @@ app.get('/api/notes', (req, res) => {
 });
 
 // To delete notes
-app.delete('/api/notes/:id', (req, res) => {
-  const {id} = req.params;
+// app.delete('/api/notes/:id', (req, res) => {
+//   const {id} = req.params;
 
-  db.remove(id)
-    .then(removed)
-      res.status(204). end();
-  else {
-      res.status(404).json({message: "Not Found"})
-    }
-  })
+//   db.remove(id)
+//   .then(removed => {
+//     if (removed) {
+//       res.status(204).end();
+//     }
+//   })
+// })
+
 
 // Listening for connections
 app.listen(PORT, () => 
