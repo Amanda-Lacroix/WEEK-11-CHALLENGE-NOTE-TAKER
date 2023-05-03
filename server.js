@@ -31,29 +31,29 @@ app.get('/notes', (req, res) =>
 // res.send ('public/index.html'));
 
 // API routes
-app.get('/api/public/notes', (req, res) => {
-    fs.readFile(__dirname + 'db/db.json', 'utf8', (err, data) => {
-      if (err) throw err;
-      res.json(JSON.parse(data));
-    });
+app.get('/api/notes', (req, res) => {
+  fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
+    if (err) throw err;
+    res.json(JSON.parse(data));
   });
-  
-app.post('/api/public/notes', (req, res) => {
+});
+
+  app.post('/api/notes', (req, res) => {
     const newNote = req.body;
     newNote.id = uuid.v4();
     
-    fs.readFile(__dirname + 'db/db.json', 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
       if (err) throw err;
       
       const notes = JSON.parse(data);
       notes.push(newNote);
       
-      fs.writeFile(__dirname + 'db/db.json', JSON.stringify(notes), (err) => {
+      fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes), (err) => {
         if (err) throw err;
         res.json(newNote);
       });
     });
-  });
+});
 
 // Listening for connections
 app.listen(PORT, () => 
