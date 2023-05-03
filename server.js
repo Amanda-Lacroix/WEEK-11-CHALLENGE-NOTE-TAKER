@@ -3,12 +3,18 @@ const express = require('express');
 const path = require('path');
 const app = express ();
 const PORT = 3001;
+const fs = require('fs');
+const uuid = require('uuid');
 
 // To use the JSON file
 // const notes = require('./db.json')
 
 // Middleware that defaults to serve the files in the Public folder
 app.use(express.static('public'));
+// Middleware for the random id
+app.use(express.urlencoded({ extended: true }));
+// Middleware for JSON
+app.use(express.json());
 
 // Route for default
 app.get('/', (req, res) => res.send('Go to /index or /notes'));
@@ -23,6 +29,31 @@ app.get('/notes', (req, res) =>
 // Redirection route if user tries to get a route that doesnt exist
 // app.get('*', (req, res) =>
 // res.send ('public/index.html'));
+
+// API routes
+app.get('/api/public/notes', (req, res) => {
+    fs.readFile(__dirname + 'db/db.json', 'utf8', (err, data) => {
+      if (err) throw err;
+      res.json(JSON.parse(data));
+    });
+  });
+  
+app.post('/api/public/notes', (req, res) => {
+    const newNote = req.body;
+    newNote.id = uuid.v4();
+    
+    fs.readFile(__dirname + 'db/db.json', 'utf8', (err, data) => {
+      if (err) throw err;
+      
+      const notes = JSON.parse(data);
+      notes.push(newNote);
+      
+      fs.writeFile(__dirname + 'db/db.json', JSON.stringify(notes), (err) => {
+        if (err) throw err;
+        res.json(newNote);
+      });
+    });
+  });
 
 // Listening for connections
 app.listen(PORT, () => 
