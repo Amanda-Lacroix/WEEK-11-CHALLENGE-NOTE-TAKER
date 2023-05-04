@@ -2,14 +2,12 @@
 const express = require('express');
 const path = require('path');
 const app = express ();
-const PORT = 3001;
 // The module to interact with the file system
 const fs = require('fs');
 // The NPM to create the unique ids
 const uuid = require('uuid');
-
-// To use the JSON file
-// const notes = require('./db.json')
+// For Heroku deploy
+const PORT = process.env.PORT || 3001;
 
 // Middleware that defaults to serve the files in the Public folder
 app.use(express.static('public'));
@@ -76,7 +74,5 @@ app.delete('/api/notes/:id', (req, res) => {
 
 
 // Listening for connections
-app.listen(PORT, () => 
-console.log(`Running on http://localhost:${PORT}`));
-    
   
+app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
