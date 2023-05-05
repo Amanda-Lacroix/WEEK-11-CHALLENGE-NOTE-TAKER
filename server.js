@@ -7,7 +7,7 @@ const fs = require('fs');
 // The NPM to create the unique ids
 const uuid = require('uuid');
 // For Heroku deploy
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 // Middleware that defaults to serve the files in the Public folder
 app.use(express.static('public'));
@@ -75,4 +75,7 @@ app.delete('/api/notes/:id', (req, res) => {
 
 // Listening for connections
   
-app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+
