@@ -62,15 +62,15 @@ app.delete('/api/notes/:id', (req, res) => {
   fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
     if (err) throw err;
     
-    const notes = JSON.parse(data);
-    notes.push(newNote);
+    let notes = JSON.parse(data);
+    notes = notes.filter(note => note.id !== id);
     
     fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes), (err) => {
       if (err) throw err;
-      res.json(newNote);
+      res.send('Note deleted successfully');
+      });
     });
   });
-});
 
 
 // Listening for connections
