@@ -18,7 +18,7 @@
 
   ## Deployment 
   
-  The app is being deployed via Heroku at: https://enigmatic-meadow-68658.herokuapp.com
+  The app is being deployed via Heroku at: https://git.heroku.com/rocky-hamlet-13032.git
 
   ## Screenshot
  
