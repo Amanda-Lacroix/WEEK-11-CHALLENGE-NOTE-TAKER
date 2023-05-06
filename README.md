@@ -18,7 +18,7 @@
 
   ## Deployment 
   
-  The app is being deployed via Heroku at: https://git.heroku.com/rocky-hamlet-13032.git
+  The app is being deployed via Heroku at: https://rocky-hamlet-13032.herokuapp.com/
 
   ## Screenshot
  
